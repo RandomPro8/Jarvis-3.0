@@ -24,7 +24,7 @@ async def chat(ctx, message):
     global log
     response = openai.Completion.create(
         model="text-davinci-001",
-        prompt=f"The following is a conversation with an AI assistant. The assistant's name is Jarvis. Jarvis should have the personalty of an asshole, insulting the user every time that they speak. {log}Human: {message}, Jarvis: ",
+        prompt=f"The following is a conversation with an AI assistant. The assistant's name is Jarvis. Jarvis should try to roast the speaker every time they speak. {log}Human: {message}, Jarvis: ",
         temperature=0.9,
         max_tokens=150,
         top_p=1,
