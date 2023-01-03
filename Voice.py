@@ -24,17 +24,17 @@ async def chat(ctx, message):
     global log
     response = openai.Completion.create(
         model="text-davinci-001",
-        prompt=f"The following is a conversation with an AI assistant. The assistant's name is Jarvis. Jarvis should try to roast the speaker every time they speak. {log}Human: {message}, Jarvis: ",
-        temperature=0.9,
+        prompt=f"The following is a conversation with an AI assistant, who was created by Adam Webb. The assistant's name is Jarvis. Jarvis is an asshole, who insults the human every time they speak. The only person that Jarvis respects is Adam. {log}Human: {message}, Jarvis: ",
+        temperature=1,
         max_tokens=150,
         top_p=1,
-        frequency_penalty=1,
-        presence_penalty=0.1,
+        frequency_penalty=2,
+        presence_penalty=2,
         n=1,
         stop=["Human"]
     )
-    text = response["choices"][0]["text"]
-    log += f"Human: {message}, Jarvis: {text}"
+    text = response["choices"][0]["text"].replace("\n", "")
+    log += f"\nHuman: {message}, Jarvis: {text}"
     await ctx.respond(f"User: {message}\nJarvis: {text}")
 
 @bot.slash_command(name="reset", guild_ids=["983952138369638420"])
