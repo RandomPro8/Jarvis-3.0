@@ -31,7 +31,7 @@ async def chat(ctx, message):
         frequency_penalty=1,
         presence_penalty=0.1,
         n=1,
-        stop=["Human", "\n"]
+        stop=["Human"]
     )
     text = response["choices"][0]["text"]
     log += f"Human: {message}, Jarvis: {text}"
@@ -43,6 +43,8 @@ async def reset(ctx):
     log = ""
     await ctx.respond(f"Memory cleared at <t:{round(time.time())}:f>")
 
-
+@bot.event
+async def on_ready():
+    print("Bot connected")
 
 bot.run(TOKEN)
